@@ -526,5 +526,37 @@
     "indoorOutdoor": "Indoor",
     "hiddenGem": false,
     "notes": "Verify current hours/seating/outlets (Outlets value is an estimate \u2014 please verify in person.)"
+  },
+  {
+    "id": 34,
+    "name": "Moffitt Library - Lower Floors",
+    "building": "Moffitt Library",
+    "type": "Library",
+    "size": "Large",
+    "food": "Food friendly",
+    "lighting": "Good",
+    "outlets": "Many",
+    "noise": "Very quiet",
+    "bestFor": "Silent study, deep focus",
+    "nearby": "Doe Library, Sproul Plaza",
+    "indoorOutdoor": "Indoor",
+    "hiddenGem": false,
+    "notes": "Moffitt is known for getting noisier the higher up you go, lower floors are silent-study zones. Prayers room is located in the first floor."
+  },
+  {
+    "id": 35,
+    "name": "Moffitt Library - Upper Floors",
+    "building": "Moffitt Library",
+    "type": "Library",
+    "size": "Large",
+    "food": "Food friendly",
+    "lighting": "Excellent",
+    "outlets": "Many",
+    "noise": "Lively / Social",
+    "bestFor": "Group work, collaborative study, socializing",
+    "nearby": "Doe Library, Sproul Plaza",
+    "indoorOutdoor": "Indoor",
+    "hiddenGem": false,
+    "notes": "Gets progressively more social/loud on higher floors."
   }
 ]

@@ -11,68 +11,64 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
-  <header class ="header">
-    <div class ="header-content">
+  <header class="site-header">
+    <div class="header-inner">
       <div class="header-title">
         <h1>Berkeley Study Spot Finder</h1>
         <p class="tagline">Find the perfect study spot on campus</p>
       </div>
       <div class="header-actions">
-        <div class="search-wrap">
-          <label for="search" class="visually-hidden">Search study spots</label>
-          <input type="text" id="search" placeholder="Search by name or building">
-        </div>
         <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
           <span id="themeIcon">🌙</span>
         </button>
       </div>
     </div>
   </header>
-  <div id="weatherBanner" class ="weather-banner" hidden></div>
+  <div id="weatherBanner" class="weather-banner" hidden></div>
   <div class="layout">
-    <div class="disclaimer">
+    <div class="disclaimer-banner">
       <p><strong>Please note:</strong> This website is student-made and is not affiliated with or officially associated with UC Berkeley. The information here was collected by students from the website, personal experience, and casual research. Information may be inaccurate or outdated, so if you notice anything that needs to be corrected, please let us know. For food policies especially, please verify with the front desk before bringing food into a space, even if this website says it is allowed. Thanks!</p>
     </div>
-    <button class ="filter-toggle" id="filterToggle" aria-expanded="false" aria-controls="filterPanel"> Filters <span id="filterCount" class="filter-count" hidden></span>
+    <button class="filter-toggle" id="filterToggle" aria-expanded="false" aria-controls="filterPanel"> Filters <span id="filterCount" class="filter-count" hidden></span>
     </button>
-    <aside class ="filters" id ="filterPanel">
+    <aside class="filters" id="filterPanel">
       <div class="filters-inner">
- 
+
         <div class="filter-group">
           <h2>Noise level</h2>
           <div class="filter-options" data-field="noise"></div>
         </div>
- 
+
         <div class="filter-group">
           <h2>Size</h2>
           <div class="filter-options" data-field="size"></div>
         </div>
- 
+
         <div class="filter-group">
           <h2>Lighting</h2>
           <div class="filter-options" data-field="lighting"></div>
         </div>
- 
+
         <div class="filter-group">
           <h2>Outlets</h2>
           <div class="filter-options" data-field="outlets"></div>
         </div>
- 
+
         <div class="filter-group">
           <h2>Food &amp; drink</h2>
           <div class="filter-options" data-field="food"></div>
         </div>
- 
+
         <div class="filter-group">
           <h2>Setting</h2>
           <div class="filter-options" data-field="indoorOutdoor"></div>
         </div>
- 
+
         <div class="filter-group">
           <h2>Space type</h2>
           <div class="filter-options" data-field="type"></div>
         </div>
- 
+
         <div class="filter-group">
           <label class="checkbox-row">
             <input type="checkbox" id="hiddenGemOnly">
@@ -82,7 +78,7 @@
         <button class="clear-btn" id="clearFilters">Clear all filters</button>
       </div>
     </aside>
-     <main class="results">
+    <main class="results">
       <div class="results-bar">
         <p id="resultCount" class="result-count"></p>
         <div class="results-actions">
@@ -103,20 +99,40 @@
           </label>
         </div>
       </div>
- 
+
       <button class="map-toggle" id="mapToggleBtn" type="button">🗺️ Show campus map</button>
       <div id="mapContainer" class="map-container" hidden></div>
- 
+
       <div id="fallbackBanner" class="fallback-banner" hidden></div>
- 
+
       <div class="card-grid" id="cardGrid"></div>
- 
+
       <div class="empty-state" id="emptyState" hidden>
-        <p>No spots match those filters.</p>
+        <p>Closest Matches</p>
         <button id="emptyClear">Clear filters and start over</button>
       </div>
     </main>
   </div>
+
+  <section class="community-section">
+    <div class="community-inner">
+      <div class="community-head">
+        <h2>Tell us about your favorite study spot</h2>
+        <p>Know a good study spot or hidden gem we missed? 👀 Fill out the form and help us grow the list!</p>
+      </div>
+      <div class="community-buttons">
+        <a class="form-link-btn" id="shareSpotBtn" href="#" target="_blank" rel="noopener">Share your favorite spot</a>
+        <a class="form-link-btn form-link-btn--secondary" href="#" target="_blank" rel="noopener">Report incorrect info</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>Data collected by hand and self-reported! Always verify current hours, food policies, and outlet availability in person.</p>
+    <p class="site-signature">Built with 🐻💙 by Noor E.</p>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

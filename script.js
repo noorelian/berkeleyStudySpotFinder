@@ -554,7 +554,7 @@ function render() {
 
   if (isFallback) {
     fallbackBanner.hidden = false;
-    fallbackBanner.textContent = `No exact match for these filters — showing the ${filtered.length} closest option${filtered.length === 1 ? "" : "s"} instead.`;
+    fallbackBanner.textContent = `Showing the ${filtered.length} closest option${filtered.length === 1 ? "" : "s"}.`;
     countEl.textContent = `${filtered.length} closest match${filtered.length === 1 ? "" : "es"}`;
   } else {
     fallbackBanner.hidden = true;
