@@ -11,7 +11,32 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
-  
-   <script src="script.js"></script>
+  <header class ="header">
+    <div class ="header-content">
+      <div class="header-title">
+        <h1>Berkeley Study Spot Finder</h1>
+        <p class="tagline">Find the perfect study spot on campus</p>
+      </div>
+      <div class="header-actions">
+        <div class="search-wrap">
+          <label for="search" class="visually-hidden">Search study spots</label>
+          <input type="text" id="search" placeholder="Search by name or building">
+        </div>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <span id="icon">🌙</span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <div id="weather" class ="weather-banner" hidden></div>
+  <div class="layout">
+    <div class="disclaimer">
+      <p><strong>Please note:</strong> This website is student-made and is not affiliated with or officially associated with UC Berkeley. The information here was collected by students from the website, personal experience, and casual research. Information may be inaccurate or outdated, so if you notice anything that needs to be corrected, please let us know. For food policies especially, please verify with the front desk before bringing food into a space, even if this website says it is allowed. Thanks!</p>
+    </div>
+    <button class ="filter-toggle" id="filterToggle" aria-expanded="false" aria-controls="filterPanel"> Filters <span id="filterCount" class="filter-count" hidden></span>
+    </button>
+    <aside class ="filters" id ="filterPanel">
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
