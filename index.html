@@ -23,12 +23,12 @@
           <input type="text" id="search" placeholder="Search by name or building">
         </div>
         <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
-          <span id="icon">🌙</span>
+          <span id="themeIcon">🌙</span>
         </button>
       </div>
     </div>
   </header>
-  <div id="weather" class ="weather-banner" hidden></div>
+  <div id="weatherBanner" class ="weather-banner" hidden></div>
   <div class="layout">
     <div class="disclaimer">
       <p><strong>Please note:</strong> This website is student-made and is not affiliated with or officially associated with UC Berkeley. The information here was collected by students from the website, personal experience, and casual research. Information may be inaccurate or outdated, so if you notice anything that needs to be corrected, please let us know. For food policies especially, please verify with the front desk before bringing food into a space, even if this website says it is allowed. Thanks!</p>
@@ -36,6 +36,86 @@
     <button class ="filter-toggle" id="filterToggle" aria-expanded="false" aria-controls="filterPanel"> Filters <span id="filterCount" class="filter-count" hidden></span>
     </button>
     <aside class ="filters" id ="filterPanel">
+      <div class="filters-inner">
+ 
+        <div class="filter-group">
+          <h2>Noise level</h2>
+          <div class="filter-options" data-field="noise"></div>
+        </div>
+ 
+        <div class="filter-group">
+          <h2>Size</h2>
+          <div class="filter-options" data-field="size"></div>
+        </div>
+ 
+        <div class="filter-group">
+          <h2>Lighting</h2>
+          <div class="filter-options" data-field="lighting"></div>
+        </div>
+ 
+        <div class="filter-group">
+          <h2>Outlets</h2>
+          <div class="filter-options" data-field="outlets"></div>
+        </div>
+ 
+        <div class="filter-group">
+          <h2>Food &amp; drink</h2>
+          <div class="filter-options" data-field="food"></div>
+        </div>
+ 
+        <div class="filter-group">
+          <h2>Setting</h2>
+          <div class="filter-options" data-field="indoorOutdoor"></div>
+        </div>
+ 
+        <div class="filter-group">
+          <h2>Space type</h2>
+          <div class="filter-options" data-field="type"></div>
+        </div>
+ 
+        <div class="filter-group">
+          <label class="checkbox-row">
+            <input type="checkbox" id="hiddenGemOnly">
+            <span>Hidden gems only</span>
+          </label>
+        </div>
+        <button class="clear-btn" id="clearFilters">Clear all filters</button>
+      </div>
+    </aside>
+     <main class="results">
+      <div class="results-bar">
+        <p id="resultCount" class="result-count"></p>
+        <div class="results-actions">
+          <button class="action-btn" id="surpriseBtn" type="button">🎲 Surprise me</button>
+          <button class="action-btn" id="nearMeBtn" type="button">📍 Near me</button>
+          <div class="view-toggle">
+            <button class="view-btn active" id="viewCardsBtn" type="button" aria-pressed="true">Cards</button>
+            <button class="view-btn" id="viewListBtn" type="button" aria-pressed="false">List</button>
+          </div>
+          <label class="sort-wrap">
+            Sort by
+            <select id="sortBy">
+              <option value="name">Name</option>
+              <option value="building">Building</option>
+              <option value="noise">Noise level</option>
+              <option value="distance" id="sortDistanceOption" hidden>Distance</option>
+            </select>
+          </label>
+        </div>
+      </div>
+ 
+      <button class="map-toggle" id="mapToggleBtn" type="button">🗺️ Show campus map</button>
+      <div id="mapContainer" class="map-container" hidden></div>
+ 
+      <div id="fallbackBanner" class="fallback-banner" hidden></div>
+ 
+      <div class="card-grid" id="cardGrid"></div>
+ 
+      <div class="empty-state" id="emptyState" hidden>
+        <p>No spots match those filters.</p>
+        <button id="emptyClear">Clear filters and start over</button>
+      </div>
+    </main>
   </div>
   <script src="script.js"></script>
 </body>
