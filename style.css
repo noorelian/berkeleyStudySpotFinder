@@ -65,7 +65,7 @@ a { color: #003262; }
   padding: 0.65rem 0.9rem;
   border: 1px solid transparent;
   border-radius: 2px;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, Georgia;
   font-size: 0.95rem;
   background: #FBF8F1;
   color: #232019;
@@ -129,7 +129,7 @@ a { color: #003262; }
 .filter-group:last-of-type { border-bottom: none; margin-bottom: 0.5rem; }
 
 .filter-group h2 {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, Georgia;
   font-size: 0.78rem;
   font-weight: 700;
   color: #003262;
@@ -158,6 +158,12 @@ a { color: #003262; }
   color: #5b564a;
   font-size: 0.78rem;
   font-variant-numeric: tabular-nums;
+  min-width: 2ch;
+  text-align: right;
+}
+
+:root[data-theme="dark"] .filter-option .count {
+  color: #8a8163;
 }
 
 .checkbox-row {
@@ -178,7 +184,7 @@ a { color: #003262; }
   border: 1px solid #b9ae90;
   border-radius: 2px;
   color: #003262;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, Georgia;
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
@@ -211,7 +217,7 @@ a { color: #003262; }
 }
 
 .sort-wrap select {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, Georgia;
   font-size: 0.85rem;
   padding: 0.35rem 0.5rem;
   border: 1px solid #b9ae90;
@@ -850,7 +856,7 @@ a { color: #003262; }
     background: #FBF8F1;
     border: 1px solid #b9ae90;
     border-radius: 2px;
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, Georgia;
     font-weight: 600;
     font-size: 0.9rem;
     color: #003262;

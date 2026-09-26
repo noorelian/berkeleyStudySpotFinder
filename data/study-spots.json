@@ -82,7 +82,7 @@
   {
     "id": 6,
     "name": "C.V. Starr East Asian Library",
-    "building": "Main campus",
+    "building": "C.V. Starr East Asian Library",
     "type": "Library",
     "size": "Large",
     "food": "Drinks with lids",
@@ -221,7 +221,7 @@
     "nearby": "Stephens, Cal NERDS",
     "indoorOutdoor": "Indoor",
     "hiddenGem": false,
-    "notes": "Lighting rated Okay based on user observation (Outlets value is an estimate \u2014 please verify in person.)"
+    "notes": "Lighting rated Okay based on user observation (Outlets value is an estimate — please verify in person.)"
   },
   {
     "id": 15,
@@ -269,7 +269,7 @@
     "nearby": "Ethnic Studies Library, Stephens",
     "indoorOutdoor": "Indoor",
     "hiddenGem": false,
-    "notes": "Community space; verify current access/rules (Outlets value is an estimate \u2014 please verify in person.)"
+    "notes": "Community space; verify current access/rules (Outlets value is an estimate — please verify in person.)"
   },
   {
     "id": 18,
@@ -285,7 +285,7 @@
     "nearby": "MLK, Lower Sproul",
     "indoorOutdoor": "Indoor",
     "hiddenGem": false,
-    "notes": "Study tables, couches, computers and microwave noted (Outlets value is an estimate \u2014 please verify in person.)"
+    "notes": "Study tables, couches, computers and microwave noted (Outlets value is an estimate — please verify in person.)"
   },
   {
     "id": 19,
@@ -301,7 +301,7 @@
     "nearby": "Lower Sproul, Sather Gate",
     "indoorOutdoor": "Indoor",
     "hiddenGem": false,
-    "notes": "Treat as separate area from the building overall (Outlets value is an estimate \u2014 please verify in person.)"
+    "notes": "Treat as separate area from the building overall (Outlets value is an estimate — please verify in person.)"
   },
   {
     "id": 20,
@@ -317,7 +317,7 @@
     "nearby": "Lower Sproul",
     "indoorOutdoor": "Indoor",
     "hiddenGem": false,
-    "notes": "Separate area entry recommended (Outlets value is an estimate \u2014 please verify in person.)"
+    "notes": "Separate area entry recommended (Outlets value is an estimate — please verify in person.)"
   },
   {
     "id": 21,
@@ -333,7 +333,7 @@
     "nearby": "Lower Sproul",
     "indoorOutdoor": "Indoor",
     "hiddenGem": false,
-    "notes": "Best categorized as social rather than quiet study (Outlets value is an estimate \u2014 please verify in person.)"
+    "notes": "Best categorized as social rather than quiet study (Outlets value is an estimate — please verify in person.)"
   },
   {
     "id": 22,
@@ -349,7 +349,7 @@
     "nearby": "MLK, Lower Sproul",
     "indoorOutdoor": "Indoor",
     "hiddenGem": false,
-    "notes": "Verify current access and rules (Outlets value is an estimate \u2014 please verify in person.)"
+    "notes": "Verify current access and rules (Outlets value is an estimate — please verify in person.)"
   },
   {
     "id": 23,
@@ -362,14 +362,14 @@
     "outlets": "Good",
     "noise": "Moderate",
     "bestFor": "Laptop work, between-class studying",
-    "nearby": "Gateway Kitchen/Caf\u00e9, Hearst",
+    "nearby": "Gateway Kitchen/Café, Hearst",
     "indoorOutdoor": "Indoor",
     "hiddenGem": true,
-    "notes": "Hidden/less obvious study areas; exact spots should be field-verified (Outlets value is an estimate \u2014 please verify in person.)"
+    "notes": "Hidden/less obvious study areas; exact spots should be field-verified (Outlets value is an estimate — please verify in person.)"
   },
   {
     "id": 24,
-    "name": "Gateway - Hidden Spots Near Kitchen/Caf\u00e9",
+    "name": "Gateway - Hidden Spots Near Kitchen/Café",
     "building": "Bakar Gateway Building",
     "type": "Hidden study spot",
     "size": "Small",
@@ -378,10 +378,10 @@
     "outlets": "Good",
     "noise": "Moderate",
     "bestFor": "Quick study, laptop work, social studying",
-    "nearby": "Gateway Kitchen/Caf\u00e9",
+    "nearby": "Gateway Kitchen/Café",
     "indoorOutdoor": "Indoor",
     "hiddenGem": true,
-    "notes": "Student-discovered/hidden spot; exact seating should be mapped (Outlets value is an estimate \u2014 please verify in person.)"
+    "notes": "Student-discovered/hidden spot; exact seating should be mapped (Outlets value is an estimate — please verify in person.)"
   },
   {
     "id": 25,
@@ -477,13 +477,13 @@
     "nearby": "MLK, Sproul",
     "indoorOutdoor": "Indoor/outdoor",
     "hiddenGem": false,
-    "notes": "Field-verify exact seating/outlets (Outlets value is an estimate \u2014 please verify in person.)"
+    "notes": "Field-verify exact seating/outlets (Outlets value is an estimate — please verify in person.)"
   },
   {
     "id": 31,
-    "name": "Free Speech Movement Caf\u00e9 Area",
+    "name": "Free Speech Movement Café Area",
     "building": "MLK Student Union",
-    "type": "Caf\u00e9/social study",
+    "type": "Café/social study",
     "size": "Medium",
     "food": "Food friendly",
     "lighting": "Good",
@@ -493,13 +493,13 @@
     "nearby": "MLK, Lower Sproul",
     "indoorOutdoor": "Indoor",
     "hiddenGem": false,
-    "notes": "Verify current seating/outlets (Outlets value is an estimate \u2014 please verify in person.)"
+    "notes": "Verify current seating/outlets (Outlets value is an estimate — please verify in person.)"
   },
   {
     "id": 32,
-    "name": "Golden Bear Caf\u00e9 Area",
+    "name": "Golden Bear Café Area",
     "building": "MLK Student Union",
-    "type": "Caf\u00e9/social study",
+    "type": "Café/social study",
     "size": "Large",
     "food": "Food friendly",
     "lighting": "Good",
@@ -509,13 +509,13 @@
     "nearby": "MLK, Lower Sproul",
     "indoorOutdoor": "Indoor",
     "hiddenGem": false,
-    "notes": "Verify current seating/outlets (Outlets value is an estimate \u2014 please verify in person.)"
+    "notes": "Verify current seating/outlets (Outlets value is an estimate — please verify in person.)"
   },
   {
     "id": 33,
-    "name": "Gateway Caf\u00e9",
+    "name": "Gateway Café",
     "building": "Bakar Gateway Building",
-    "type": "Caf\u00e9",
+    "type": "Café",
     "size": "Medium",
     "food": "Food friendly",
     "lighting": "Good",
@@ -525,7 +525,7 @@
     "nearby": "Gateway study areas",
     "indoorOutdoor": "Indoor",
     "hiddenGem": false,
-    "notes": "Verify current hours/seating/outlets (Outlets value is an estimate \u2014 please verify in person.)"
+    "notes": "Verify current hours/seating/outlets (Outlets value is an estimate — please verify in person.)"
   },
   {
     "id": 34,

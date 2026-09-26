@@ -1,8 +1,9 @@
 let allSpots = [];
-let viewMode = "cards"; // Two way of showing options either as cards or list 
-let userLocation = null; 
+let viewMode = "cards"; // Two way of showing options either as cards or list
+let userLocation = null;
 let map = null;
 let mapVisible = false;
+let prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const activeFilters = {
   noise: new Set(),
@@ -18,7 +19,7 @@ let hiddenGemOnly = false;
 let searchTerm = "";
 let sortField = "name";
 
-// Noise 
+// Noise
 const NOISE_BUCKET_KEYWORDS = {
   "Quiet": ["quiet"],
   "Moderate": ["moderate"],
@@ -26,7 +27,21 @@ const NOISE_BUCKET_KEYWORDS = {
 };
 const NOISE_BUCKETS = Object.keys(NOISE_BUCKET_KEYWORDS);
 
-// Space 
+// Rank used for sorting by noise level, quietest first. A spot's raw
+// noise string is matched against each bucket's keywords in order
+// (Quiet -> Moderate -> Lively/Social); first match wins.
+const NOISE_RANK_ORDER = ["Quiet", "Moderate", "Lively / Social"];
+
+function noiseRank(noise) {
+  const value = (noise || "").toLowerCase();
+  for (let i = 0; i < NOISE_RANK_ORDER.length; i++) {
+    const bucket = NOISE_RANK_ORDER[i];
+    if (NOISE_BUCKET_KEYWORDS[bucket].some((kw) => value.includes(kw))) return i;
+  }
+  return NOISE_RANK_ORDER.length; // unrecognized noise strings sort last
+}
+
+// Space
 const TYPE_MAP = {
   "Library": "Library",
   "Main library": "Library",
@@ -52,7 +67,7 @@ function typeCategory(rawType) {
   return TYPE_MAP[rawType] || rawType;
 }
 
-// Size, food, outlets, lighting and space type 
+// Size, food, outlets, lighting and space type
 const CATEGORY_ORDER = {
   size: ["Large", "Medium", "Small"],
   food: ["Food friendly", "Snacks/drinks with lids", "Drinks with lids", "Food not allowed"],
@@ -82,6 +97,8 @@ const BUILDING_COORDS = {
   "Sproul Plaza": { lat: 37.8695, lng: -122.2590 },
   "Lower Sproul": { lat: 37.8686, lng: -122.2591 },
   "Kresge Hall": { lat: 37.8752, lng: -122.2585 },
+  "C.V. Starr East Asian Library": { lat: 37.8723, lng: -122.2596 },
+  "Moffitt Library": { lat: 37.8724, lng: -122.2604 },
 };
 
 // Init
@@ -173,8 +190,10 @@ function buildFilterOptions() {
   const indoorOutdoorValues = uniqueSorted(allSpots.map((s) => s.indoorOutdoor).filter(Boolean));
   renderOptionGroup("indoorOutdoor", indoorOutdoorValues);
 
- 
+
   renderOptionGroup("noise", NOISE_BUCKETS);
+
+  updateFilterCounts();
 }
 
 function uniqueSorted(arr) {
@@ -190,9 +209,44 @@ function renderOptionGroup(field, values) {
         <label class="filter-option" for="${id}">
           <input type="checkbox" id="${id}" data-field="${field}" value="${escapeAttr(val)}">
           <span>${escapeHtml(val)}</span>
+          <span class="count" data-count-for="${field}:${escapeAttr(val)}"></span>
         </label>`;
     })
     .join("");
+}
+
+// Live counts next to each filter option: how many spots would match
+// if that single option were the only filter applied within its field
+// (combined with whatever's already active in every other field).
+function updateFilterCounts() {
+  const fields = Object.keys(activeFilters);
+
+  fields.forEach((field) => {
+    const container = document.querySelector(`.filter-options[data-field="${field}"]`);
+    if (!container) return;
+
+    container.querySelectorAll(".count").forEach((el) => {
+      const [, value] = el.dataset.countFor.split(":");
+      const count = allSpots.filter((spot) => {
+        if (!passesHardFilters(spot)) return false;
+        return fields.every((f) => {
+          if (f === field) return matchesFieldValue(spot, f, value);
+          return FIELD_MATCHERS[f](spot);
+        });
+      }).length;
+      el.textContent = count > 0 ? `(${count})` : "(0)";
+    });
+  });
+}
+
+function matchesFieldValue(spot, field, value) {
+  if (field === "type") return typeCategory(spot.type) === value;
+  if (field === "indoorOutdoor") return spot.indoorOutdoor === value;
+  if (field === "noise") {
+    const v = (spot.noise || "").toLowerCase();
+    return NOISE_BUCKET_KEYWORDS[value].some((kw) => v.includes(kw));
+  }
+  return spot[field] === value;
 }
 
 function slug(str) {
@@ -244,7 +298,7 @@ function attachEvents() {
   // Near me
   document.getElementById("nearMeBtn").addEventListener("click", useMyLocation);
 
-  // Map 
+  // Map
   document.getElementById("mapToggleBtn").addEventListener("click", toggleMap);
 
   const shareBtn = document.getElementById("shareSpotBtn");
@@ -285,7 +339,7 @@ function surpriseMe() {
   const pick = filtered[Math.floor(Math.random() * filtered.length)];
   const el = document.getElementById(`spot-${pick.id}`);
   if (!el) return;
-  el.scrollIntoView({ behavior: "smooth", block: "center" });
+  el.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "center" });
   el.classList.add("spot-highlight");
   setTimeout(() => el.classList.remove("spot-highlight"), 1800);
 }
@@ -340,7 +394,10 @@ function getSpotDistance(spot) {
 // @keyframes + custom properties, since each piece needs its own
 // randomized direction/rotation and plain CSS keyframes can't take
 // per-element values without a --custom-property.
+// Skipped entirely when the user has requested reduced motion.
 function fireConfetti(x, y) {
+  if (prefersReducedMotion) return;
+
   const colors = ["#FDB515", "#003262", "#5C6B4E", "#F5F1E6"];
   const count = 26;
 
@@ -404,9 +461,14 @@ function initMap() {
     byBuilding[spot.building].push(spot);
   });
 
+  const missingCoords = [];
+
   Object.entries(byBuilding).forEach(([building, spots]) => {
     const coords = BUILDING_COORDS[building];
-    if (!coords) return;
+    if (!coords) {
+      missingCoords.push(building);
+      return;
+    }
 
     const marker = L.marker([coords.lat, coords.lng]).addTo(map);
     const listHtml = spots
@@ -421,7 +483,7 @@ function initMap() {
           const id = link.dataset.id;
           const el = document.getElementById(`spot-${id}`);
           if (el) {
-            el.scrollIntoView({ behavior: "smooth", block: "center" });
+            el.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "center" });
             el.classList.add("spot-highlight");
             setTimeout(() => el.classList.remove("spot-highlight"), 1800);
           }
@@ -429,6 +491,10 @@ function initMap() {
       });
     });
   });
+
+  if (missingCoords.length) {
+    console.warn("No map coordinates for building(s):", missingCoords.join(", "));
+  }
 }
 
 
@@ -460,18 +526,16 @@ const FIELD_MATCHERS = {
   },
 };
 
+// Fields checked when the person types in the search box. Extended
+// beyond name/building/nearby so a search for something like "printer"
+// or "group work" can also surface matches from bestFor/notes.
 function passesHardFilters(spot) {
   if (hiddenGemOnly && !spot.hiddenGem) return false;
   if (searchTerm) {
-    const haystack = `${spot.name} ${spot.building} ${spot.nearby}`.toLowerCase();
+    const haystack = `${spot.name} ${spot.building} ${spot.nearby} ${spot.bestFor || ""} ${spot.notes || ""}`.toLowerCase();
     if (!haystack.includes(searchTerm)) return false;
   }
   return true;
-}
-
-function matchesSpot(spot) {
-  if (!passesHardFilters(spot)) return false;
-  return Object.values(FIELD_MATCHERS).every((fn) => fn(spot));
 }
 
 function activeFieldNames() {
@@ -493,6 +557,9 @@ function sortSpots(spots) {
       return da - db;
     });
   }
+  if (sortField === "noise") {
+    return spots.sort((a, b) => noiseRank(a.noise) - noiseRank(b.noise) || a.name.localeCompare(b.name));
+  }
   return spots.sort((a, b) => (a[sortField] || "").localeCompare(b[sortField] || ""));
 }
 
@@ -502,12 +569,12 @@ function getFiltered() {
   const exact = candidates.filter((spot) => Object.values(FIELD_MATCHERS).every((fn) => fn(spot)));
 
   if (exact.length > 0) {
-    return { spots: sortSpots(exact), isFallback: false, matches: {} };
+    return { spots: sortSpots(exact), isFallback: false, matches: {}, noCandidates: false };
   }
 
   const fields = activeFieldNames();
   if (fields.length === 0 || candidates.length === 0) {
-    return { spots: [], isFallback: false, matches: {} };
+    return { spots: [], isFallback: false, matches: {}, noCandidates: true };
   }
 
   const scored = candidates.map((spot) => ({ spot, score: countMatchingFields(spot, fields) }));
@@ -519,7 +586,7 @@ function getFiltered() {
     matches[spot.id] = fields.filter((f) => FIELD_MATCHERS[f](spot)).map((f) => FIELD_LABELS[f]);
   });
 
-  return { spots: sortSpots(closest), isFallback: true, matches };
+  return { spots: sortSpots(closest), isFallback: true, matches, noCandidates: false };
 }
 
 
@@ -534,18 +601,25 @@ function noiseColor(noise) {
 
 
 function render() {
-  const { spots: filtered, isFallback, matches } = getFiltered();
+  const { spots: filtered, isFallback, matches, noCandidates } = getFiltered();
   const grid = document.getElementById("cardGrid");
   const empty = document.getElementById("emptyState");
+  const emptyMessage = document.getElementById("emptyMessage");
   const countEl = document.getElementById("resultCount");
   const fallbackBanner = document.getElementById("fallbackBanner");
 
   updateFilterBadge();
+  updateFilterCounts();
   grid.classList.toggle("list-view", viewMode === "list");
 
   if (filtered.length === 0) {
     grid.innerHTML = "";
     empty.hidden = false;
+    if (emptyMessage) {
+      emptyMessage.textContent = noCandidates
+        ? "No spots match your search or hidden-gem filter."
+        : "No spots match your filters.";
+    }
     fallbackBanner.hidden = true;
     countEl.textContent = "0 spots";
     return;

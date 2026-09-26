@@ -20,7 +20,7 @@
       <div class="header-actions">
         <div class="search-wrap">
           <label for="search" class="visually-hidden">Search study spots</label>
-          <input type="text" id="search" placeholder="Search by name or building">
+          <input type="text" id="search" placeholder="Search by name, building, or activity">
         </div>
         <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
           <span id="themeIcon">🌙</span>
@@ -37,42 +37,42 @@
     </button>
     <aside class="filters" id="filterPanel">
       <div class="filters-inner">
-
+ 
         <div class="filter-group">
           <h2>Noise level</h2>
           <div class="filter-options" data-field="noise"></div>
         </div>
-
+ 
         <div class="filter-group">
           <h2>Size</h2>
           <div class="filter-options" data-field="size"></div>
         </div>
-
+ 
         <div class="filter-group">
           <h2>Lighting</h2>
           <div class="filter-options" data-field="lighting"></div>
         </div>
-
+ 
         <div class="filter-group">
           <h2>Outlets</h2>
           <div class="filter-options" data-field="outlets"></div>
         </div>
-
+ 
         <div class="filter-group">
           <h2>Food &amp; drink</h2>
           <div class="filter-options" data-field="food"></div>
         </div>
-
+ 
         <div class="filter-group">
           <h2>Setting</h2>
           <div class="filter-options" data-field="indoorOutdoor"></div>
         </div>
-
+ 
         <div class="filter-group">
           <h2>Space type</h2>
           <div class="filter-options" data-field="type"></div>
         </div>
-
+ 
         <div class="filter-group">
           <label class="checkbox-row">
             <input type="checkbox" id="hiddenGemOnly">
@@ -84,7 +84,7 @@
     </aside>
     <main class="results">
       <div class="results-bar">
-        <p id="resultCount" class="result-count"></p>
+        <p id="resultCount" class="result-count" aria-live="polite"></p>
         <div class="results-actions">
           <button class="action-btn" id="surpriseBtn" type="button">🎲 Surprise me</button>
           <button class="action-btn" id="nearMeBtn" type="button">📍 Near me</button>
@@ -103,21 +103,21 @@
           </label>
         </div>
       </div>
-
+ 
       <button class="map-toggle" id="mapToggleBtn" type="button">🗺️ Show campus map</button>
       <div id="mapContainer" class="map-container" hidden></div>
-
-      <div id="fallbackBanner" class="fallback-banner" hidden></div>
-
+ 
+      <div id="fallbackBanner" class="fallback-banner" hidden aria-live="polite"></div>
+ 
       <div class="card-grid" id="cardGrid"></div>
-
+ 
       <div class="empty-state" id="emptyState" hidden>
-        <p>Closest Matches</p>
+        <p id="emptyMessage">No spots match your filters.</p>
         <button id="emptyClear">Clear filters and start over</button>
       </div>
     </main>
   </div>
-
+ 
   <section class="community-section">
     <div class="community-inner">
       <div class="community-head">
@@ -130,12 +130,12 @@
       </div>
     </div>
   </section>
-
+ 
   <footer class="site-footer">
     <p>Data collected by hand and self-reported! Always verify current hours, food policies, and outlet availability in person.</p>
     <p class="site-signature">Built with 🐻💙 by Noor E.</p>
   </footer>
-
+ 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js"></script>
 </body>
